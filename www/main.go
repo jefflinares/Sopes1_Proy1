@@ -1,7 +1,7 @@
 package main
 
 import (
-	"encoding/json"
+	//"encoding/json"
 	"log"
 	"fmt"
 	"net/http"
@@ -27,7 +27,7 @@ func main() {
 
 
 
-	http.Handle("/", http.FileServer(http.Dir("public")))
+	http.Handle("/", http.FileServer(http.Dir("./public")))
 	http.Handle("/socket.io/", server)
 	log.Println("Server on port 3000")
 	log.Fatal(http.ListenAndServe(":3000", nil))
@@ -46,18 +46,16 @@ func createServerSocket() (*socketio.Server, error) {
 	})
 
 	server.OnEvent("/", "cpu", func(s socketio.Conn, msg string) {
-		  log.Println("CPU")
-		  
-		  v, _ := cpu.Percent(0, false)
-		  //disk := DiskUsage("/")
-		  //log.Println(v[0])
-		  json_bytes, _ := json.Marshal(Cpu{Used: int(v[0]), 
-			UsedPercent: fmt.Sprintf("%.4f", v[0])})
-		  s.Emit("cpu", string(json_bytes))
-
-		  log.Println(json_bytes)
+		v, _ := cpu.Percent(0, false)
+		cpu_ :=  Cpu{
+			Used: int(v[0]), 
+			UsedPercent: fmt.Sprintf("%.4f", v[0]),
+		}
+		s.Emit("cpu", cpu_)
 
 	})
+
+
 
 	server.OnEvent("/", "ram", func(s socketio.Conn, msg string) {})
 	
