@@ -45,6 +45,7 @@ var cnt = 0;
 
 setInterval(() => {
   socket.emit("cpu");
+  
   cnt++;
   if (cnt > 10) {
     Plotly.relayout(graph, {
@@ -54,4 +55,5 @@ setInterval(() => {
       }
     });
   }
+  document.getElementById('segundos').innerHTML = (cnt) + " s.";
 }, 1000);
