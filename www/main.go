@@ -47,7 +47,7 @@ func createServerSocket() (*socketio.Server, error) {
 	server.OnEvent("/", "ram-used", func(s socketio.Conn, msg string) {
 		v, _ := mem.VirtualMemory()
 		ram := Ram{
-			Used:        v.Free / 1024 / 1024,
+			Used:        v.Used / 1024 / 1024,
 			UsedPercent: fmt.Sprintf("%.4f", v.UsedPercent),
 		}
 		s.Emit("ram-used", ram)

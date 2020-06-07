@@ -1,6 +1,9 @@
 const socket = io();
 
 const graph = document.getElementById("graph");
+const totalDiv = document.getElementById("total");
+const usedDiv = document.getElementById("used");
+const usedPercentDiv = document.getElementById("usedPercent");
 
 Plotly.plot(
   graph,
@@ -25,7 +28,7 @@ Plotly.plot(
 );
 
 socket.on("ram-total", (total) => {
-  console.log(total);
+  totalDiv.innerText = total + " MB";
   Plotly.relayout(graph, {
     yaxis: {
       range: [0, total]
@@ -34,6 +37,9 @@ socket.on("ram-total", (total) => {
 });
 
 socket.on("ram-used", (ram) => {
+  usedDiv.innerText = ram.used + " MB";
+  usedPercentDiv.innerText = ram.usedPercent + " %";
+
   Plotly.extendTraces(
     graph,
     {
@@ -41,10 +47,11 @@ socket.on("ram-used", (ram) => {
     },
     [0]
   );
-
 });
 
-socket.emit("ram-total");
+setTimeout(() => {
+  socket.emit("ram-total");
+}, 500);
 
 var cnt = 0;
 
@@ -59,3 +66,4 @@ setInterval(() => {
     });
   }
 }, 1000);
+
