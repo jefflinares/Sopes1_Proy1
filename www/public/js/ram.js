@@ -25,11 +25,12 @@ Plotly.plot(
 );
 
 socket.on("ram-total", (total) => {
+  console.log(total);
   Plotly.relayout(graph, {
     yaxis: {
       range: [0, total]
     }
-  })
+  });  
 });
 
 socket.on("ram-used", (ram) => {
@@ -40,6 +41,7 @@ socket.on("ram-used", (ram) => {
     },
     [0]
   );
+
 });
 
 socket.emit("ram-total");

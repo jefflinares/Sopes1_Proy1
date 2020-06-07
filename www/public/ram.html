@@ -10,10 +10,112 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/border.css" />
   </head>
   <body>
-    <main>
-      <div id="graph"></div>
+    <main class="container-fluid">
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Monitor de RAM</h1>
+      </div>
+
+      <div class="row">
+        <!-- Card de total de memoria RAM -->
+        <div class="col-xl-4 col-md-6 mb-4">
+          <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div
+                    class="text-xs font-weight-bold text-success text-uppercase mb-1"
+                  >
+                    Total de memoria RAM del servidor
+                  </div>
+                  <div
+                    id="total"
+                    class="h5 mb-0 font-weight-bold text-gray-800"
+                  >
+                    0 MB
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <span class="material-icons">
+                    memory
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card de total de memoria usada -->
+        <div class="col-xl-4 col-md-6 mb-4">
+          <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div
+                    class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+                  >
+                    Total de memoria RAM consumida
+                  </div>
+                  <div id="used" class="h5 mb-0 font-weight-bold text-gray-800">
+                    0 MB
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <span class="material-icons">
+                    grade
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card del porcentaje usado -->
+        <div class="col-xl-4 col-md-6 mb-4">
+          <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div
+                    class="text-xs font-weight-bold text-info text-uppercase mb-1"
+                  >
+                    Porcentaje de consumo de RAM
+                  </div>
+                  <div
+                    id="usedPercent"
+                    class="h5 mb-0 font-weight-bold text-gray-800"
+                  >
+                    0 %
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <span class="material-icons">
+                    show_chart
+                  </span>                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card de grafica de memoria usada -->
+      <div class="card shadow mb-4">
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">Memoria</h6>
+        </div>
+        <div class="card-body">
+          <div id="graph"></div>
+        </div>
+      </div>
     </main>
   </body>
   <!-- PLOTLY -->
