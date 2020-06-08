@@ -9,6 +9,7 @@ Plotly.plot(
   graph,
   [
     {
+      x: [new Date()],
       y: [0],
       mode: "lines+markers",
       name: "RAM consumida (MB)",
@@ -18,47 +19,56 @@ Plotly.plot(
   ],
   {
     xaxis: {
-      title: "Uso de memoria",
-      range: [0, 50]
+      range: [0, 50],
     },
     yaxis: {
-      title: "Memoria RAM (MB)",
+      title: "Uso de memoria (MB)",
+      showticklabels: true,
+      tickangle: 45,
+      tickfont: {
+        family: 'Old Standard TT, serif',
+        size: 14,
+        color: 'black'
+      }
     },
   }
 );
 
 socket.on("ram-total", (total) => {
-  totalDiv.innerText = total + " MB"; 
+  totalDiv.innerText = total + " MB";
 });
 
 socket.on("ram-used", (ram) => {
   usedDiv.innerText = ram.used + " MB";
   usedPercentDiv.innerText = ram.usedPercent + " %";
 
-  Plotly.extendTraces(
-    graph,
-    {
-      y: [[ram.used]],
-    },
-    [0]
-  );
+  var time = new Date();
+
+  var update = {
+    x: [[time]],
+    y: [[ram.used]]
+  }
+
+  var olderTime = time.setMinutes(time.getMinutes() - 1);
+  var futureTime = time.setMinutes(time.getMinutes() + 1);
+
+  var minuteView = {
+    xaxis: {
+      type: 'date',
+      range: [olderTime, futureTime]
+    }
+  };
+
+  Plotly.relayout(graph, minuteView);
+  Plotly.extendTraces(graph, update, [0])
 });
 
 setTimeout(() => {
   socket.emit("ram-total");
 }, 500);
 
-var cnt = 0;
 
 setInterval(() => {
   socket.emit("ram-used");
-  cnt++;
-  if (cnt > 50) {
-    Plotly.relayout(graph, {
-      xaxis: {
-        range: [cnt - 50, cnt]
-      }
-    });
-  }
 }, 1000);
 

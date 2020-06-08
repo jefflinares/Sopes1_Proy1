@@ -11,10 +11,10 @@
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="css/border.css" />
+    <link rel="stylesheet" href="css/css_cards.css" />
   </head>
   <body>
     <main class="container-fluid">
@@ -24,96 +24,76 @@
 
       <div class="row">
         <!-- Card de total de memoria RAM -->
-        <div class="col-xl-4 col-md-6 mb-4">
-          <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                  <div
-                    class="text-xs font-weight-bold text-success text-uppercase mb-1"
-                  >
-                    Total de memoria RAM del servidor
-                  </div>
-                  <div
-                    id="total"
-                    class="h5 mb-0 font-weight-bold text-gray-800"
-                  >
-                    0 MB
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <span class="material-icons">
-                    memory
-                  </span>
-                </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="wrimagecard wrimagecard-topimage">
+            <div
+              class="wrimagecard-topimage_header"
+              style="background-color: rgba(22, 160, 133, 0.1);"
+            >
+              <div class="d-flex justify-content-center">
+                <i class="fa fa-microchip" style="color: #16a085;"></i>
               </div>
+            </div>
+            <div class="wrimagecard-topimage_title">
+              <h6>
+                Total de memoria RAM
+                <div class="badge badge-pill badge-secondary">
+                  <h6 id="total">0 MB</h6>
+                </div>
+              </h6>
             </div>
           </div>
         </div>
 
         <!-- Card de total de memoria usada -->
-        <div class="col-xl-4 col-md-6 mb-4">
-          <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                  <div
-                    class="text-xs font-weight-bold text-warning text-uppercase mb-1"
-                  >
-                    Total de memoria RAM consumida
-                  </div>
-                  <div id="used" class="h5 mb-0 font-weight-bold text-gray-800">
-                    0 MB
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <span class="material-icons">
-                    grade
-                  </span>
-                </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="wrimagecard wrimagecard-topimage">
+            <div
+              class="wrimagecard-topimage_header"
+              style="background-color: rgba(22, 160, 133, 0.1);"
+            >
+              <div class="d-flex justify-content-center">
+                <i class="fa fa-microchip" style="color: #16a085;"></i>
               </div>
+            </div>
+            <div class="wrimagecard-topimage_title">
+              <h6>
+                Total de memoria RAM consumida
+                <div class="badge badge-pill badge-secondary">
+                  <h6 id="used">0 MB</h6>
+                </div>
+              </h6>
             </div>
           </div>
         </div>
 
         <!-- Card del porcentaje usado -->
-        <div class="col-xl-4 col-md-6 mb-4">
-          <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                  <div
-                    class="text-xs font-weight-bold text-info text-uppercase mb-1"
-                  >
-                    Porcentaje de consumo de RAM
-                  </div>
-                  <div
-                    id="usedPercent"
-                    class="h5 mb-0 font-weight-bold text-gray-800"
-                  >
-                    0 %
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <span class="material-icons">
-                    show_chart
-                  </span>                  
-                </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="wrimagecard wrimagecard-topimage">
+            <div
+              class="wrimagecard-topimage_header"
+              style="background-color: rgba(22, 160, 133, 0.1);"
+            >
+              <div class="d-flex justify-content-center">
+                <i class="fa fa-microchip" style="color: #16a085;"></i>
               </div>
+            </div>
+            <div class="wrimagecard-topimage_title">
+              <h6>
+                Porcentaje de consumo de RAM
+                <div class="badge badge-pill badge-secondary">
+                  <h6 id="usedPercent">0 %</h6>
+                </div>
+              </h6>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Card de grafica de memoria usada -->
-      <div class="card shadow mb-4">
-        <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
-        >
-          <h6 class="m-0 font-weight-bold text-primary">Memoria</h6>
-        </div>
-        <div class="card-body">
-          <div id="graph"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-4">
+          <div class="wrimagecard wrimagecard-topimage" id="graph"></div>
         </div>
       </div>
     </main>
