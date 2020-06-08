@@ -13,7 +13,7 @@ Plotly.plot(
       y: [0],
       mode: "lines+markers",
       name: "RAM consumida (MB)",
-      marker: { color: "orange", size: 8 },
+      marker: { color: "#80CAF6", size: 8 },
       line: { width: 4 },
     },
   ],
