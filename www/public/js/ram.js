@@ -19,7 +19,7 @@ Plotly.plot(
   {
     xaxis: {
       title: "Uso de memoria",
-      range: [0, 10]
+      range: [0, 50]
     },
     yaxis: {
       title: "Memoria RAM (MB)",
@@ -28,12 +28,7 @@ Plotly.plot(
 );
 
 socket.on("ram-total", (total) => {
-  totalDiv.innerText = total + " MB";
-  Plotly.relayout(graph, {
-    yaxis: {
-      range: [0, total]
-    }
-  });  
+  totalDiv.innerText = total + " MB"; 
 });
 
 socket.on("ram-used", (ram) => {
@@ -58,10 +53,10 @@ var cnt = 0;
 setInterval(() => {
   socket.emit("ram-used");
   cnt++;
-  if (cnt > 10) {
+  if (cnt > 50) {
     Plotly.relayout(graph, {
       xaxis: {
-        range: [cnt - 10, cnt]
+        range: [cnt - 50, cnt]
       }
     });
   }

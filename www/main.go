@@ -1,18 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
 	socketio "github.com/googollee/go-socket.io"
-	"github.com/shirou/gopsutil/mem"
 )
-
-type Ram struct {
-	Used        uint64 `json:"used"`
-	UsedPercent string `json:"usedPercent"`
-}
 
 func main() {
 	server, err := createServerSocket()
@@ -45,17 +38,17 @@ func createServerSocket() (*socketio.Server, error) {
 	server.OnEvent("/", "cpu", func(s socketio.Conn, msg string) {})
 
 	server.OnEvent("/", "ram-used", func(s socketio.Conn, msg string) {
-		v, _ := mem.VirtualMemory()
-		ram := Ram{
-			Used:        v.Used / 1024 / 1024,
-			UsedPercent: fmt.Sprintf("%.4f", v.UsedPercent),
-		}
+		ram := new(RAM)
+		ram.virtualMemory()
 		s.Emit("ram-used", ram)
 	})
 
 	server.OnEvent("/", "ram-total", func(s socketio.Conn, msg string) {
-		v, _ := mem.VirtualMemory()
-		s.Emit("ram-total", v.Total/1024/1024)
+		total, err := getTotalRAM()
+		if err != nil {
+			log.Fatal(err)
+		}
+		s.Emit("ram-total", total)
 	})
 
 	server.OnDisconnect("/", func(s socketio.Conn, msg string) {})
