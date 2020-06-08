@@ -1,11 +1,19 @@
 package main
 
 import (
+	//"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
 	socketio "github.com/googollee/go-socket.io"
+	"github.com/shirou/gopsutil/cpu"
 )
+
+type Cpu struct {
+	Used        int    `json:"Used"`
+	UsedPercent string `json:"UsedPercent"`
+}
 
 func main() {
 	server, err := createServerSocket()
@@ -17,8 +25,8 @@ func main() {
 	go server.Serve()
 	defer server.Close()
 
-	http.Handle("/socket.io/", server)
 	http.Handle("/", http.FileServer(http.Dir("./public")))
+	http.Handle("/socket.io/", server)
 	log.Println("Server on port 3000")
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }
@@ -35,7 +43,15 @@ func createServerSocket() (*socketio.Server, error) {
 		return nil
 	})
 
-	server.OnEvent("/", "cpu", func(s socketio.Conn, msg string) {})
+	server.OnEvent("/", "cpu", func(s socketio.Conn, msg string) {
+		v, _ := cpu.Percent(0, false)
+		cpu_ := Cpu{
+			Used:        int(v[0]),
+			UsedPercent: fmt.Sprintf("%.4f", v[0]),
+		}
+		s.Emit("cpu", cpu_)
+
+	})
 
 	server.OnEvent("/", "ram-used", func(s socketio.Conn, msg string) {
 		ram := new(RAM)
