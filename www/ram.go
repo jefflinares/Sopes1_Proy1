@@ -75,6 +75,7 @@ func getTotalRAM() (uint64, error) {
 		switch key {
 		case "MemTotal":
 			total = (t * 1000) / 1024 / 1024
+			return total, nil
 		}
 	}
 	return total, nil
