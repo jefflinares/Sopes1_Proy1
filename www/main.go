@@ -17,7 +17,7 @@ func main() {
 
 	go server.Serve()
 	defer server.Close()
-
+	http.Handle("/", http.FileServer(http.Dir("./public")))
 	http.Handle("/socket.io", server)
 	log.Println("Server on port 3000")
 	log.Fatal(http.ListenAndServe(":3000", nil))
