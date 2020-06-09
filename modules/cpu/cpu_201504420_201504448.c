@@ -17,6 +17,9 @@
 #include <linux/string.h>
 #include <linux/types.h>
 
+/*
+ * Metodo para imprimir los tabs dentro del archivo
+ */
 void print_tabs(struct seq_file *file, int tabs) {
   int i;
   if (tabs > 0) {
@@ -25,6 +28,9 @@ void print_tabs(struct seq_file *file, int tabs) {
   }
 }
 
+/*
+ * Metodo recursivo para leer cada proceso
+ */
 void read_process(struct seq_file *file, struct task_struct *task_parent, int tabs) {
   char state[50];
 
@@ -64,6 +70,10 @@ void read_process(struct seq_file *file, struct task_struct *task_parent, int ta
   }
 }
 
+/*
+ * Metodo que imprime los procesos y busca el proceso padre
+ * el cual es el que tiene como pid=1
+ */
 static int task_tree(struct seq_file *file, void *v) {
   struct task_struct *parent = current;
   while (parent->pid != 1)
@@ -74,10 +84,16 @@ static int task_tree(struct seq_file *file, void *v) {
   return 0;
 }
 
+/*
+ * Metodo que reacciona al abrir el archivo del proceso
+ */
 static int cpu_proc_open(struct inode *inode, struct file *file) {
   return single_open(file, task_tree, NULL);
 }
 
+/*
+ * operaciones que realiza un archivo, al abrir, al leer, etc.
+ */
 static const struct file_operations cpu_fops = {
   .owner   = THIS_MODULE,
   .open    = cpu_proc_open,
@@ -91,12 +107,18 @@ MODULE_AUTHOR("Ronald Berdúo - Jefferson Linares");
 MODULE_DESCRIPTION("Módulo CPU(task_struct)");
 MODULE_VERSION("0.1.0");
 
+/*
+ * Inicio del modulo, imprime los nombres y crea el proceso
+ */
 static int __init cpu_201504420_201504448_init(void) {
   printk(KERN_INFO "Nombres:\n\tRonald Neftali Berdúo Morales\n\tJefferson Linares Cerón\n");
   proc_create("cpu_201504420_201504448", 0, NULL, &cpu_fops);
   return 0;
 }
 
+/*
+ * Salida del modulo, elimina el proceso e imprime el nombre del curso
+ */
 static void __exit cpu_201504420_201504448_exit(void) {
   remove_proc_entry("cpu_201504420_201504448", NULL);
   printk(KERN_INFO "Sistemas operativos 1\n");

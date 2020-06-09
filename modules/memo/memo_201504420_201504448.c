@@ -23,6 +23,9 @@
 
 #define MEGABYTE 1024
 
+/*
+ * Metodo que obtiene los datos de la memoria RAM
+ */
 static int read_memorie(struct seq_file *file, void *v) {
   #define convert(x) ((x) << (PAGE_SHIFT - 10))
   struct sysinfo info;
@@ -42,10 +45,16 @@ static int read_memorie(struct seq_file *file, void *v) {
 	return 0;
 }
 
+/*
+ * Metodo que reacciona al abrir el archivo del proceso
+ */
 static int memo_open(struct inode *inode, struct file *file) {
   return single_open(file, read_memorie, NULL);
 }
 
+/*
+ * operaciones que realiza un archivo, al abrir, al leer, etc.
+ */
 static const struct file_operations memo_fops = {
   .owner   = THIS_MODULE,
   .open    = memo_open,
@@ -59,12 +68,18 @@ MODULE_AUTHOR("Ronald Berdúo - Jefferson Linares");
 MODULE_DESCRIPTION("Módulo de Memoria(sysinfo)");
 MODULE_VERSION("0.1.0");
 
+/*
+ * Inicio del modulo, imprime los carnets y crea el proceso
+ */
 static int __init memo_201504420_201504448_init(void) {
 	printk(KERN_INFO "201504420 - 201504448\n");
 	proc_create("memo_201504420_201504448", 0, NULL, &memo_fops);
 	return 0;
 }
 
+/*
+ * Salida del modulo, elimina el proceso e imprime el nombre del curso
+ */
 static void __exit memo_201504420_201504448_exit(void) {
 	remove_proc_entry("memo_201504420_201504448", NULL);
 	printk(KERN_INFO "Sistemas Operativos 1\n");
