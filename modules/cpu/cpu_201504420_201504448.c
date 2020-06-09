@@ -78,11 +78,12 @@ static int cpu_proc_open(struct inode *inode, struct file *file) {
   return single_open(file, task_tree, NULL);
 }
 
-static const struct file_operations fops = {
-  .open       = cpu_proc_open,
-  .read       = seq_read,
-  .llseek     = seq_lseek,
-  .release    = single_release,
+static const struct file_operations cpu_fops = {
+  .owner   = THIS_MODULE,
+  .open    = cpu_proc_open,
+  .read    = seq_read,
+  .llseek  = seq_lseek,
+  .release = single_release,
 };
 
 MODULE_LICENSE("GPL");
@@ -92,7 +93,7 @@ MODULE_VERSION("0.1.0");
 
 static int __init cpu_201504420_201504448_init(void) {
   printk(KERN_INFO "Nombres:\n\tRonald Neftali Berdúo Morales\n\tJefferson Linares Cerón\n");
-  proc_create("cpu_201504420_201504448", 0, NULL, &fops);
+  proc_create("cpu_201504420_201504448", 0, NULL, &cpu_fops);
   return 0;
 }
 
