@@ -32,6 +32,8 @@ void print_tabs(struct seq_file *file, int tabs) {
  * Metodo recursivo para leer cada proceso
  */
 void read_process(struct seq_file *file, struct task_struct *task_parent, int tabs) {
+  struct task_struct *task_children;
+  struct list_head *list_current;
   char state[50];
 
   switch(task_parent->state) {
@@ -61,9 +63,6 @@ void read_process(struct seq_file *file, struct task_struct *task_parent, int ta
     task_parent->pid, task_parent->comm, state
   );
 
-  struct task_struct *task_children;
-  struct list_head *list_current;
-
   list_for_each(list_current, &task_parent->children) {
     task_children = list_entry(list_current, struct task_struct, sibling);
     read_process(file, task_children, tabs + 1);
@@ -79,8 +78,7 @@ static int task_tree(struct seq_file *file, void *v) {
   while (parent->pid != 1)
       parent = parent->parent;
   
-  int tabs = 0;
-  read_process(file, parent, tabs);
+  read_process(file, parent, 0);
   return 0;
 }
 
