@@ -2,6 +2,7 @@ package main
 
 import (
 	//"encoding/json"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -65,6 +66,15 @@ func createServerSocket() (*socketio.Server, error) {
 			log.Fatal(err)
 		}
 		s.Emit("ram-total", total)
+	})
+
+	server.OnEvent("/", "proc", func(s socketio.Conn, msg string) {
+		procInfo := getInfoProcs()
+
+		json_bytes, _ := json.Marshal(procInfo)
+
+		s.Emit("proc", string(json_bytes))
+
 	})
 
 	server.OnDisconnect("/", func(s socketio.Conn, msg string) {})
