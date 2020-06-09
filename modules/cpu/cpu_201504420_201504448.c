@@ -17,8 +17,15 @@
 #include <linux/string.h>
 #include <linux/types.h>
 
+void print_tabs(struct seq_file *file, int tabs) {
+  int i;
+  if (tabs > 0) {
+    seq_printf(file, "|");
+    for (i = 0; i < tabs; i++) seq_printf(file, "---");
+  }
+}
 
-void read_process(struct seq_file *file, struct task_struct *task_parent) {
+void read_process(struct seq_file *file, struct task_struct *task_parent, int tabs) {
   char state[50];
 
   switch(task_parent->state) {
@@ -41,9 +48,10 @@ void read_process(struct seq_file *file, struct task_struct *task_parent) {
 	    strcpy(state, "Unknown");
   }
 
+  print_tabs(file, tabs);
   seq_printf(
     file,
-    "PID:\t%d\nNombre:\t%s\nEstado:\t%s\n\n",
+    "├── PID:%d\t\tNombre: %s\t\tEstado: %s\n",
     task_parent->pid, task_parent->comm, state
   );
 
@@ -52,15 +60,17 @@ void read_process(struct seq_file *file, struct task_struct *task_parent) {
 
   list_for_each(list_current, &task_parent->children) {
     task_children = list_entry(list_current, struct task_struct, sibling);
-    read_process(file, task_children);
+    read_process(file, task_children, tabs + 1);
   }
 }
 
 static int task_tree(struct seq_file *file, void *v) {
   struct task_struct *parent = current;
   while (parent->pid != 1)
-      parent = parent->parent; 
-  read_process(file, parent);
+      parent = parent->parent;
+  
+  int tabs = 0;
+  read_process(file, parent, tabs);
   return 0;
 }
 
