@@ -1,6 +1,7 @@
 // https://www.tutorialspoint.com/unix_system_calls/sysinfo.htm
 // https://man7.org/linux/man-pages/man2/sysinfo.2.html
 // https://www.informit.com/articles/article.aspx?p=23618&seqNum=15
+// https://kernelnewbies.org/MemoryIssues
 
 #include <linux/module.h>
 #include <linux/kernel.h>
