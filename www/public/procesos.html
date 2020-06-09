@@ -17,9 +17,6 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./css/css_cards.css" media="screen"/>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
-   
-
   </head>
   <body>
     <main>
@@ -40,7 +37,13 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link active" id="compiEditor-tab" data-toggle="tab" href="cpu.html" role="tab" aria-controls="compiEditor" aria-selected="true">CPU
+                    <a class="nav-link active" id="errores-tab" data-toggle="tab" href="procesos.html" role="tab" aria-controls="errores" aria-selected="true">PROCESOS
+                      <i class="fa fa-cogs" style="color: #16a085;"></i>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link " id="compiEditor-tab" data-toggle="tab" href="cpu.html" role="tab" aria-controls="compiEditor" aria-selected="true">CPU
                       <i class="fa fa-microchip" style="color: #16a085;"></i>
                     </a>
                   </li>
@@ -51,57 +54,16 @@
                       </a>
                     </li>
         
-                  <li class="nav-item">
-                    <a class="nav-link" id="errores-tab" data-toggle="tab" href="procesos.html" role="tab" aria-controls="errores" aria-selected="true">PROCESOS
-                      <i class="fa fa-cogs" style="color: #16a085;"></i>
-                    </a>
-                  </li>
+                 
                 </ul>
               </div>
             </nav>
         </div>
-         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Monitor de CPU</h1>
-      </div>
-        <div class="row">
-        <div class="col-md-6 col-sm-4">
-        <div class="wrimagecard wrimagecard-topimage">
-                <a href="#">
-                <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1) ">
-                  <center><i class="fa fa-microchip" style="color:#16A085"></i></center>
-                </div>
-                <div class="wrimagecard-topimage_title">
-                  <h4>PORCENTAJE CPU
-                  <div class="pull-right badge" ><h4 id = "cpu_used"></h4></div></h4>
-                </div>
-              </a>
-            </div>
-            </div>
-          <div class="col-md-6 col-sm-4">
-            <div class="wrimagecard wrimagecard-topimage">
-                <a href="#">
-                <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1)">
-                  <center><i class = "fa fa-clock-o" style="color:#16A085"></i></center>
-                </div>
-                <div class="wrimagecard-topimage_title">
-                  <h4>Tiempo
-                  <div class="pull-right badge" id="WrControls">
-                    <h4 id = "segundos"></h4>
-                  </div></h4>
-                </div>
-              </a>
-            </div>
-      </div>
-      </div>
-        <div class="row">
-          <div class="col-md-12 col-sm-4">
-            <div class="wrimagecard wrimagecard-topimage" id="graph">
-              
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Monitor de PROCESOS</h1>
+          </div>
+        
     </main>
   </body>
   <!-- PLOTLY -->
