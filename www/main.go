@@ -2,7 +2,7 @@ package main
 
 import (
 	//"encoding/json"
-	"encoding/json"
+
 	"fmt"
 	"log"
 	"net/http"
@@ -71,8 +71,8 @@ func createServerSocket() (*socketio.Server, error) {
 	server.OnEvent("/", "proc", func(s socketio.Conn, msg string) {
 		fmt.Println("procesos")
 		ProcInfo := getInfoProcs()
-		json_bytes, _ := json.Marshal(ProcInfo)
-		s.Emit("proc", json_bytes)
+		// json_bytes, _ := json.Marshal(ProcInfo)
+		s.Emit("proc", ProcInfo)
 	})
 
 	server.OnDisconnect("/", func(s socketio.Conn, msg string) {})
