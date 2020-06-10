@@ -12,14 +12,13 @@ import (
 )
 
 type Proc struct {
-	Pid      string  `json:"Pid,omitempty"`
-	Name     string  `json:"Name,omitempty"`
-	User     string  `json:"User,omitempty"`
-	Status   string  `json:"Status,omitempty"`
-	Memory   string  `json:"Memory,omitempty"`
-	PPid     string  `json:"PPid,omitempty"`
-	Hijos    []*Proc `json:"Hijos,omitempty"`
-	mostrado int     `json:"mostrado,omitempty"`
+	Pid    string  `json:"Pid,omitempty"`
+	Name   string  `json:"Name,omitempty"`
+	User   string  `json:"User,omitempty"`
+	Status string  `json:"Status,omitempty"`
+	Memory string  `json:"Memory,omitempty"`
+	PPid   string  `json:"PPid,omitempty"`
+	Hijos  []*Proc `json:"Hijos,omitempty"`
 }
 
 type ProcsInfo struct {
@@ -31,7 +30,7 @@ type ProcsInfo struct {
 	Processes    []*Proc `json:"Processes,omitempty"`
 }
 
-func getInfoProcs() ProcsInfo {
+func getInfoProcs() *ProcsInfo {
 	files, err := ioutil.ReadDir("/proc")
 	if err != nil {
 		log.Fatal(err)
@@ -155,9 +154,17 @@ func getInfoProcs() ProcsInfo {
 		seeTreeProcess(p, "---")
 	}
 
-	return ProcsInfo{No_Procs: len(procs), No_Procs_Run: No_Procs_Running,
+	return &ProcsInfo{No_Procs: len(procs), No_Procs_Run: No_Procs_Running,
 		No_Procs_Slp: No_Procs_Sleeping, No_Procs_Stp: No_Procs_Stopped,
 		No_Procs_Zmb: No_Procs_Zombies, Processes: procs_padre}
+
+	//fmt.Println(json_bytes)
+
+	/*
+		return ProcsInfo{No_Procs: len(procs), No_Procs_Run: No_Procs_Running,
+			No_Procs_Slp: No_Procs_Sleeping, No_Procs_Stp: No_Procs_Stopped,
+			No_Procs_Zmb: No_Procs_Zombies, Processes: procs_padre}
+	*/
 }
 
 func seeTreeProcess(proc *Proc, tab string) {

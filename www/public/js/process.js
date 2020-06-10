@@ -1,6 +1,9 @@
 const socket = io();
-var cnt = 0;
+
 socket.emit("proc");
 
+socket.on("proc", (procInfo) => {
+    console.log(SON.stringify(procInfo))
+});
 
  

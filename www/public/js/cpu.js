@@ -28,7 +28,7 @@ Plotly.plot(
 
 
 socket.on("cpu", (cpu) => {
-    document.getElementById('cpu_used').innerHTML = cpu.Used + "%"
+  document.getElementById('cpu_used').innerHTML = cpu.Used + "%"
   Plotly.extendTraces(
     graph,
     {

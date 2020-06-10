@@ -69,12 +69,10 @@ func createServerSocket() (*socketio.Server, error) {
 	})
 
 	server.OnEvent("/", "proc", func(s socketio.Conn, msg string) {
-		procInfo := getInfoProcs()
-
-		json_bytes, _ := json.Marshal(procInfo)
-
-		s.Emit("proc", string(json_bytes))
-
+		fmt.Println("procesos")
+		ProcInfo := getInfoProcs()
+		json_bytes, _ := json.Marshal(ProcInfo)
+		s.Emit("proc", json_bytes)
 	})
 
 	server.OnDisconnect("/", func(s socketio.Conn, msg string) {})
