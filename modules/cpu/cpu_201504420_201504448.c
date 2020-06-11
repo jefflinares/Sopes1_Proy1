@@ -60,7 +60,7 @@ void read_process(struct seq_file *file, struct task_struct *task_parent, int ta
   print_tabs(file, tabs);
   seq_printf(
     file,
-    "├── PID: %d \t\t Nombre: %s \t\t Estado: %s\n",
+    "├── PID: %-10d \tNombre: %-20s \tEstado: %-20s\n",
     task_parent->pid, task_parent->comm, state
   );
 
