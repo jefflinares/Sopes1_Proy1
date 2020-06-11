@@ -15,6 +15,7 @@ socket.on("proc", (procInfo) => {
     var div = document.getElementById("tablaProcesos");
     div.innerHTML = "";
     var table_body = createTable(div) ;
+    
     for(let i = 0; i < procInfo.Processes.length; i ++)
     {
       if(i > 0){
@@ -24,7 +25,7 @@ socket.on("proc", (procInfo) => {
        j += getJson(procInfo.Processes[i], "\t");
        
 
-       addProcInfo(procInfo.Processes[i], 0, table_body);
+      // addProcInfo(procInfo.Processes[i], 0, table_body);
 
 
     }
@@ -49,7 +50,7 @@ function createTh(txt)
 {
   var th = document.createElement('th');
   th.scope = "col";
-  th.innerHTML = txt;
+  th.append(txt);
   return th;
 }
 
@@ -68,12 +69,13 @@ function createTd(class_name, txt)
 {
   var td = document.createElement('td');
   td.setAttribute("class",class_name);
-  td.innerHTML = txt;
+  td.append(txt);
   return td;
 }
 
 function createDiv(class_name, id)
 {
+   
   var div = document.createElement("div");
   div.setAttribute("id",id);
   div.setAttribute("class",class_name);
@@ -85,16 +87,16 @@ function addProcInfo(proc,level, tbody)
   var tr = createTr("accordion-toggle collapsed","accordion"+accodionId++, "collapse"+collapseId++);
   var hasChilds = false;
   if(proc.Hijos !== undefined && proc.Hijos.length > 0){
-    tr.append(createTd("expand-button", ""))
+    tr.appendChild(createTd("expand-button", ""));
     hasChilds = true;
   }
-  tr.append(createTd("expand-button", proc.Pid));
-  tr.append(createTd("expand-button", proc.Name));
-  tr.append(createTd("expand-button", proc.User));
-  tr.append(createTd("expand-button", proc.Memory));
-  tr.append(createTd("expand-button", proc.Status));
-  tr.append(createTd("expand-button", proc.PPid));
-  tbody.append(tr);
+  tr.appendChild(createTd("expand-button", proc.Pid));
+  tr.appendChild(createTd("expand-button", proc.Name));
+  tr.appendChild(createTd("expand-button", proc.User));
+  tr.appendChild(createTd("expand-button", proc.Memory));
+  tr.appendChild(createTd("expand-button", proc.Status));
+  tr.appendChild(createTd("expand-button", proc.PPid));
+  tbody.innerHTML = (tr);
 
   
   if(hasChilds)
@@ -102,7 +104,7 @@ function addProcInfo(proc,level, tbody)
     
     tr = createTr("hide-table-padding");
     for(let i = 0; i<level;i++){
-      tr.append(createTd("",""));
+      tr.innerHTML += (createTd("",""));
     }
     var td_div = createTd();
     td_div.setAttribute("colspan","12");
@@ -120,9 +122,9 @@ function addProcInfo(proc,level, tbody)
       addProcInfo(proc.Hijos[i], level+1,tableChilds);
     }
     */
-    td_div.append(divChilds);
-    tr.append(td_div);
-    tbody.append(tr);
+    td_div.appendChild((divChilds));
+    tr.appendChild((td_div));
+    tbody.appendChild((tr));
   }
 }
 
@@ -131,16 +133,16 @@ function createTable(div)
   var table = document.createElement("table");
   table.className = "table"
   var thead = document.createElement("thead");
-  table.append(thead);
-  thead.append(createTh("PID"));
-  thead.append(createTh("NAME"));
-  thead.append(createTh("USER"));
-  thead.append(createTh("MEMORY"));
-  thead.append(createTh("STATUS"));
-  thead.append(createTh("PPID"));
+  table.appendChild((thead));
+  thead.appendChild(createTh("PID"));
+  thead.appendChild(createTh("NAME"));
+  thead.appendChild(createTh("USER"));
+  thead.appendChild(createTh("MEMORY"));
+  thead.appendChild(createTh("STATUS"));
+  thead.appendChild(createTh("PPID"));
 
   var tbody = document.createElement("tbody");
-  div.append(table);
+  div.appendChild(table);
   return tbody;
 
 }
@@ -196,12 +198,12 @@ function cargarTreeView() {
 
 
 
-
+/*
 setInterval(() => {
   socket.emit("proc");
   
 }, 120000);
-
+*/
 
 
 
