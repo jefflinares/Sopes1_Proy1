@@ -75,11 +75,11 @@ void read_process(struct seq_file *file, struct task_struct *task_parent, int ta
  * el cual es el que tiene como pid=1
  */
 static int task_tree(struct seq_file *file, void *v) {
-  seq_printf(file, "\t\t __________________________________________ \n");
+  seq_printf(file, "\t\t ___________________________________________ \n");
   seq_printf(file, "\t\t|                                           |\n");
   seq_printf(file, "\t\t| Ronald Neftali Berdúo Morales - 201504420 |\n");
   seq_printf(file, "\t\t| Jefferson Linares Cerón       - 201504448 |\n");
-  seq_printf(file, "\t\t|__________________________________________ |\n\n\n");
+  seq_printf(file, "\t\t|___________________________________________|\n\n\n");
   read_process(file, &init_task, 0);
   return 0;
 }
