@@ -168,7 +168,7 @@ func getInfoProcs() *ProcsInfo {
 }
 
 func seeTreeProcess(proc *Proc, tab string) {
-	fmt.Println(tab, "Proccess: ", proc.Name)
+	//fmt.Println(tab, "Proccess: ", proc.Name)
 	if len(proc.Hijos) > 0 {
 		for _, H := range proc.Hijos {
 			seeTreeProcess(H, tab+"---")
