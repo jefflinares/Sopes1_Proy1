@@ -15,6 +15,8 @@ type RAM struct {
 	Cached      uint64  `json:"cached"`
 }
 
+// Explicacion de memoria RAM
+// https://soporte.itlinux.cl/hc/es/articles/200121338-Explicaci%C3%B3n-del-uso-de-Memoria-RAM#:~:text=En%20el%20caso%20de%20Linux,como%20memoria%20cach%C3%A9%2C%20o%20buffer.&text=Lo%20cual%20nos%20indica%20que,RAM%20efectivamente%20disponibles%20para%20utilizar.
 func (ram *RAM) virtualMemory() error {
 	filename := "/proc/meminfo"
 	lines, _ := readLines(filename)
