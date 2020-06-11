@@ -40,7 +40,7 @@ static int read_memorie(struct seq_file *file, void *v) {
 	seq_printf(file, "Nombres:           Ronald Neftali Berdúo Morales | Jefferson Linares Cerón\n");	
 	seq_printf(file, "Memoria Total: %8lu MB\n", totalram);
 	seq_printf(file, "Memoria Libre: %8lu MB\n", freeram);
-	seq_printf(file, "Memoria Usada:     %ld%%\n",  used_percent);
+	seq_printf(file, "Memoria Usada:     %6ld%%\n",  used_percent);
   #undef K
 	return 0;
 }

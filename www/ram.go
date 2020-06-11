@@ -35,19 +35,19 @@ func (ram *RAM) virtualMemory() error {
 
 		switch key {
 		case "MemTotal":
-			ram.Total = (t * 1000) / 1024 / 1024
+			ram.Total = t / 1024
 		case "MemFree":
-			ram.Free = (t * 1000) / 1024 / 1024
+			ram.Free = t / 1024
 		case "Buffers":
-			ram.Buffers = (t * 1000) / 1024 / 1024
+			ram.Buffers = t / 1024
 		case "Cached":
-			ram.Cached = (t * 1000) / 1024 / 1024
+			ram.Cached = t / 1024
 		}
 	}
 
 	ram.Available = ram.Free + ram.Buffers + ram.Cached
 	ram.Used = ram.Total - ram.Available
-	ram.UsedPercent = float64(ram.Total-ram.Available) / float64(ram.Total) * 100.0
+	ram.UsedPercent = (float64(ram.Total-ram.Available) / float64(ram.Total)) * 100.0
 
 	return nil
 }
@@ -74,7 +74,7 @@ func getTotalRAM() (uint64, error) {
 
 		switch key {
 		case "MemTotal":
-			total = (t * 1000) / 1024 / 1024
+			total = t / 1024
 			return total, nil
 		}
 	}
