@@ -2,6 +2,7 @@
 // https://devarea.com/linux-kernel-development-creating-a-proc-file-and-interfacing-with-user-space/#.Xt7bCM9KiNI
 // https://kernelnewbies.org/Documents/SeqFileHowTo
 // https://tuxthink.blogspot.com/2013/10/creating-read-write-proc-entry-in.html?m=1
+// https://www.tldp.org/LDP/lki/lki-2.html
 
 #include <linux/fs.h>
 #include <linux/init.h>
@@ -40,20 +41,20 @@ void read_process(struct seq_file *file, struct task_struct *task_parent, int ta
     case TASK_RUNNING:
 	    strcpy(state, "Running");
 	    break;
-	case TASK_STOPPED:
- 	    strcpy(state, "Stopped");
-	    break;
-	case TASK_INTERRUPTIBLE:
- 	    strcpy(state,"Interruptible");
-	    break;
-	case TASK_UNINTERRUPTIBLE:
- 	    strcpy(state,"Ininterrumpible");
-	    break;
-	case EXIT_ZOMBIE:
- 	    strcpy(state, "Zombie");
-	    break;
-	default:
-	    strcpy(state, "Unknown");
+    case TASK_INTERRUPTIBLE:
+      strcpy(state,"Interruptible");
+      break;
+    case TASK_UNINTERRUPTIBLE:
+      strcpy(state,"Uninterrumpible");
+      break;
+    case EXIT_ZOMBIE:
+      strcpy(state, "Zombie");
+      break;
+    case TASK_STOPPED:
+      strcpy(state, "Stopped");
+      break;
+    default:
+      strcpy(state, "Unknown");
   }
 
   print_tabs(file, tabs);
@@ -74,11 +75,12 @@ void read_process(struct seq_file *file, struct task_struct *task_parent, int ta
  * el cual es el que tiene como pid=1
  */
 static int task_tree(struct seq_file *file, void *v) {
-  struct task_struct *parent = current;
-  while (parent->pid != 1)
-      parent = parent->parent;
-  
-  read_process(file, parent, 0);
+  seq_printf(file, "\t\t __________________________________________ \n");
+  seq_printf(file, "\t\t|                                           |\n");
+  seq_printf(file, "\t\t| Ronald Neftali Berdúo Morales - 201504420 |\n");
+  seq_printf(file, "\t\t| Jefferson Linares Cerón       - 201504448 |\n");
+  seq_printf(file, "\t\t|__________________________________________ |\n\n\n");
+  read_process(file, &init_task, 0);
   return 0;
 }
 
