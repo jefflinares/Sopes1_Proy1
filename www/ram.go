@@ -15,6 +15,8 @@ type RAM struct {
 	Cached      uint64  `json:"cached"`
 }
 
+// Explicacion de memoria RAM
+// https://soporte.itlinux.cl/hc/es/articles/200121338-Explicaci%C3%B3n-del-uso-de-Memoria-RAM#:~:text=En%20el%20caso%20de%20Linux,como%20memoria%20cach%C3%A9%2C%20o%20buffer.&text=Lo%20cual%20nos%20indica%20que,RAM%20efectivamente%20disponibles%20para%20utilizar.
 func (ram *RAM) virtualMemory() error {
 	filename := "/proc/meminfo"
 	lines, _ := readLines(filename)
@@ -35,19 +37,19 @@ func (ram *RAM) virtualMemory() error {
 
 		switch key {
 		case "MemTotal":
-			ram.Total = (t * 1000) / 1024 / 1024
+			ram.Total = t / 1024
 		case "MemFree":
-			ram.Free = (t * 1000) / 1024 / 1024
+			ram.Free = t / 1024
 		case "Buffers":
-			ram.Buffers = (t * 1000) / 1024 / 1024
+			ram.Buffers = t / 1024
 		case "Cached":
-			ram.Cached = (t * 1000) / 1024 / 1024
+			ram.Cached = t / 1024
 		}
 	}
 
 	ram.Available = ram.Free + ram.Buffers + ram.Cached
 	ram.Used = ram.Total - ram.Available
-	ram.UsedPercent = float64(ram.Total-ram.Available) / float64(ram.Total) * 100.0
+	ram.UsedPercent = (float64(ram.Total-ram.Available) / float64(ram.Total)) * 100.0
 
 	return nil
 }
@@ -74,7 +76,7 @@ func getTotalRAM() (uint64, error) {
 
 		switch key {
 		case "MemTotal":
-			total = (t * 1000) / 1024 / 1024
+			total = t / 1024
 			return total, nil
 		}
 	}
