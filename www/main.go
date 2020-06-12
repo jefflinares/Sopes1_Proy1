@@ -3,9 +3,12 @@ package main
 import (
 	//"encoding/json"
 
+	"bytes"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"os/exec"
 
 	socketio "github.com/googollee/go-socket.io"
 	"github.com/shirou/gopsutil/cpu"
@@ -74,6 +77,19 @@ func createServerSocket() (*socketio.Server, error) {
 		// json_bytes, _ := json.Marshal(ProcInfo)
 		s.Emit("proc", ProcInfo)
 		fmt.Println("procesos")
+	})
+
+	server.OnEvent("/", "kill", func(s socketio.Conn, pid string) {
+
+		cmd := exec.Command("kill", "-9", pid)
+		cmdOutput := &bytes.Buffer{}
+		cmd.Stdout = cmdOutput
+		err := cmd.Run()
+		if err != nil {
+			s.Emit("kill", err.Error())
+			os.Stderr.WriteString(err.Error())
+		}
+		s.Emit("kill", 1)
 	})
 
 	server.OnDisconnect("/", func(s socketio.Conn, msg string) {})

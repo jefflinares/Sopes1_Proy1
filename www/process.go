@@ -23,7 +23,7 @@ type Proc struct {
 
 type ProcsInfo struct {
 	No_Procs     int     `json:"No_Procs"`
-	No_Procs_Run int     `json:"NoR_Procs_un"`
+	No_Procs_Run int     `json:"No_Procs_Run"`
 	No_Procs_Slp int     `json:"No_Procs_Slp"`
 	No_Procs_Stp int     `json:"No_Procs_Stp"`
 	No_Procs_Zmb int     `json:"No_Procs_Zmb"`
@@ -88,12 +88,16 @@ func getInfoProcs() *ProcsInfo {
 						p.Status = strings.TrimSpace(fields[1])
 						if strings.HasPrefix(p.Status, "S") || strings.HasPrefix(p.Status, "D") {
 							No_Procs_Sleeping++
+							p.Status = "Sleeping"
 						} else if strings.HasPrefix(p.Status, "T") {
 							No_Procs_Stopped++
+							p.Status = "Stopped"
 						} else if strings.HasPrefix(p.Status, "Z") {
 							No_Procs_Zombies++
+							p.Status = "Zombie"
 						} else if strings.HasPrefix(p.Status, "R") {
 							No_Procs_Running++
+							p.Status = "Running"
 						} else {
 							//fmt.Println("No se reconocio el estado", p.Status)
 						}
@@ -113,9 +117,12 @@ func getInfoProcs() *ProcsInfo {
 						if err != nil {
 							log.Fatal(err)
 						}
-						mem = mem / ((t * 1000) / 1024 / 1024)
-						p.Memory = fmt.Sprintf("%8d", t)
+						t = t / 1024
+						percent_used := float32(t) / float32(mem) * 100.00
+						p.Memory = fmt.Sprintf("%.2f", percent_used)
+						//fmt.Println("Proceso:", p.Name, " %memory:", p.Memory, "percenten:", percent_used, "totalRam:", mem, "memProc:", t)
 						break
+						//5431.72
 
 					}
 
@@ -149,22 +156,16 @@ func getInfoProcs() *ProcsInfo {
 
 	fmt.Println("Procesos recogidos total:", len(procs))
 	fmt.Println("Procesos padres total:", len(procs_padre))
-
-	for _, p := range procs_padre {
-		seeTreeProcess(p, "---")
-	}
+	/*
+		for _, p := range procs_padre {
+			seeTreeProcess(p, "---")
+		}
+	*/
 
 	return &ProcsInfo{No_Procs: len(procs), No_Procs_Run: No_Procs_Running,
 		No_Procs_Slp: No_Procs_Sleeping, No_Procs_Stp: No_Procs_Stopped,
 		No_Procs_Zmb: No_Procs_Zombies, Processes: procs_padre}
 
-	//fmt.Println(json_bytes)
-
-	/*
-		return ProcsInfo{No_Procs: len(procs), No_Procs_Run: No_Procs_Running,
-			No_Procs_Slp: No_Procs_Sleeping, No_Procs_Stp: No_Procs_Stopped,
-			No_Procs_Zmb: No_Procs_Zombies, Processes: procs_padre}
-	*/
 }
 
 func seeTreeProcess(proc *Proc, tab string) {

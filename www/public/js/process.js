@@ -3,6 +3,11 @@ const socket = io();
 
 const divTablaProcesos = document.getElementById("tablaProcesos");
 
+const td1 = document.getElementById('td_1');
+const td2 = document.getElementById('td_2');
+const td3 = document.getElementById('td_3');
+const td4 = document.getElementById('td_4');
+const td5 = document.getElementById('td_5');
 
 let accodionId = 1;
 let collapseId = 1;
@@ -11,8 +16,25 @@ socket.on("proc", (procInfo) => {
   try {
     divTablaProcesos.innerHTML = "";
     divTablaProcesos.appendChild(createTable(procInfo.Processes));
+    
+    td1.innerHTML = procInfo.No_Procs_Run;
+    td2.innerHTML = procInfo.No_Procs_Slp;
+    td3.innerHTML = procInfo.No_Procs_Stp;
+    td4.innerHTML = procInfo.No_Procs_Zmb;
+    td5.innerHTML = procInfo.No_Procs;
+
   } catch (error) {
     console.log(error);
+  }
+});
+
+socket.on("kill", (respuesta) => {
+  if(respuesta === 1)
+  {
+    alert('Se ha detenido el proceso');
+  }
+  else{
+    alert('Fallo la detencio del proceso: '+respuesta)
   }
 });
 
@@ -28,9 +50,10 @@ function createTable(processes) {
   thead.appendChild(createTh("PID"));
   thead.appendChild(createTh("NAME"));
   thead.appendChild(createTh("USER"));
-  thead.appendChild(createTh("MEMORY"));
+  thead.appendChild(createTh("MEMORY (%)"));
   thead.appendChild(createTh("STATUS"));
   thead.appendChild(createTh("PPID"));
+  thead.appendChild(createTh("KILL"));
   let tbody = createBody(processes);
   table.appendChild(thead);
   table.appendChild(tbody);
@@ -98,11 +121,42 @@ function createTrHead(id, collap, proc) {
   tr.appendChild(createTd(proc.Pid, ""));
   tr.appendChild(createTd(proc.Name, ""));
   tr.appendChild(createTd(proc.User, ""));
-  tr.appendChild(createTd(proc.Memory, ""));
+  tr.appendChild(createTd(proc.Memory !== undefined ? proc.Memory + "%" : 0 + "%", ""));
   tr.appendChild(createTd(proc.Status, ""));
   tr.appendChild(createTd(proc.PPid, ""));
+  var td_button = createTd("","");
+  td_button.appendChild(createBtn("btn btn-danger", "Kill",proc.Pid, proc.Name));
+  tr.appendChild(td_button);
   return tr;
 }
+
+/**
+ * @param {string} class_name
+ * @param {string} text
+ * @param {string} pid
+ * @param {string} proceso
+ * 
+ */
+function createBtn(class_name, text, pid, proceso)
+{
+  var btn = document.createElement("button");
+  btn.className = class_name;
+  btn.innerHTML = text;
+  btn.id = "btn_"+pid
+  btn.onclick = function (){ killProc(pid, proceso)};
+  return btn;
+
+}
+
+function killProc(pid,proceso){
+  if(confirm('Desea matar el proceso '+proceso+ " con el pid: "+pid))
+  {
+    socket.emit("kill", pid);
+
+  }
+
+}
+
 
 /**
  *
@@ -124,18 +178,14 @@ function createTrBody(collap, processes) {
   return tr;
 }
 
-
-/*
-=======
-
+socket.emit("proc");
 
 setInterval(() => {
   socket.emit("proc");
-}, 120000);
-<<<<<<< HEAD
-*/
+}, 20000);
 
 
 
-socket.emit("proc");
+
+
 

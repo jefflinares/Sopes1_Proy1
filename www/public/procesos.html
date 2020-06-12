@@ -72,6 +72,17 @@
       href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
 
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- custom JS -->
+
+    <style>
+      body {
+        font-family: "Open Sans";
+      }
+      .container {
+        margin: 150px auto;
+      }
+    </style>
   </head>
   <body>
     <main>
@@ -148,10 +159,47 @@
         <h1 class="h3 mb-0 text-gray-800">Monitor de PROCESOS</h1>
       </div>
 
+      <div class="row">
+        <div class="col-md-12 col-sm-4">
+        <div class="wrimagecard wrimagecard-topimage">
+                <a href="#">
+                <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1) ">
+                  <center>
+                    <table class="table table-sm table-dark">
+                      <thead>
+                        <tr>
+                          <th scope="col">Procesos En Ejecucion</th>
+                          <th scope="col">Procesos Suspendidos</th>
+                          <th scope="col">Procesos Detenidos</th>
+                          <th scope="col">Procesos Zombie</th>
+                          <th scope="col">Total Procesos</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td id="td_1"></td>
+                          <td id="td_2"></td>
+                          <td id="td_3"></td>                          
+                          <td id="td_4"></td>
+                          <td id="td_5"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!--i class="fa fa-microchip" style="color:#16A085"></i-->
+                  </center>
+                </div>
+                <div class="wrimagecard-topimage_title">
+                  <h4>Info Procesos</h4>
+                </div>
+              </a>
+            </div>
+            </div>
+         
+      </div>
+
       <div class="table-responsive" id="tablaProcesos"></div>
 
-        </div>
-      </div>
+    
     </main>
 
   </body>
