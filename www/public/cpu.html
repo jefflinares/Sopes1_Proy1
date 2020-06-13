@@ -10,98 +10,149 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./css/css_cards.css" media="screen"/>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
-   
-
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+    />
+    <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./css/css_cards.css"
+      media="screen"
+    />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </head>
   <body>
     <main>
-
       <div class="container-fluid">
         <div class="row">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    
-            <div class="row" >
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" id="navbar" role="tab">
+            <div class="row">
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" id="navbar" role="tab">
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="cuadruplos-tab"
+                    data-toggle="tab"
+                    href="index.html"
+                    role="tab"
+                    aria-controls="cuadruplos"
+                    aria-selected="false"
+                    >INICIO
+                    <i class="fa fa-home" style="color: #16a085;"></i>
+                  </a>
+                </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" id="cuadruplos-tab" data-toggle="tab" href="index.html" role="tab" aria-controls="cuadruplos" aria-selected="false">INICIO
-                      <i class="fa fa-home" style="color: #16a085;"></i>
-                    </a>
-                    
-                  </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="compiEditor-tab"
+                    data-toggle="tab"
+                    href="cpu.html"
+                    role="tab"
+                    aria-controls="compiEditor"
+                    aria-selected="true"
+                    >CPU
+                    <i class="fa fa-microchip" style="color: #16a085;"></i>
+                  </a>
+                </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link active" id="compiEditor-tab" data-toggle="tab" href="cpu.html" role="tab" aria-controls="compiEditor" aria-selected="true">CPU
-                      <i class="fa fa-microchip" style="color: #16a085;"></i>
-                    </a>
-                  </li>
-                  
-                  <li class="nav-item">
-                      <a class="nav-link" id="reporteSimbolos-tab" data-toggle="tab" href="ram.html" role="tab" aria-controls="reporteSimbolos" aria-selected="true">RAM
-                        <i class="fa fa-memory" style="color: #16a085;"></i>
-                      </a>
-                    </li>
-        
-                  <li class="nav-item">
-                    <a class="nav-link" id="errores-tab" data-toggle="tab" href="procesos.html" role="tab" aria-controls="errores" aria-selected="true">PROCESOS
-                      <i class="fa fa-cogs" style="color: #16a085;"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </nav>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="reporteSimbolos-tab"
+                    data-toggle="tab"
+                    href="ram.html"
+                    role="tab"
+                    aria-controls="reporteSimbolos"
+                    aria-selected="true"
+                    >RAM
+                    <i class="fa fa-memory" style="color: #16a085;"></i>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="errores-tab"
+                    data-toggle="tab"
+                    href="procesos.html"
+                    role="tab"
+                    aria-controls="errores"
+                    aria-selected="true"
+                    >PROCESOS
+                    <i class="fa fa-cogs" style="color: #16a085;"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
         </div>
-         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Monitor de CPU</h1>
-      </div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Monitor de CPU</h1>
+        </div>
         <div class="row">
-        <div class="col-md-6 col-sm-4">
-        <div class="wrimagecard wrimagecard-topimage">
-                <a href="#">
-                <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1) ">
-                  <center><i class="fa fa-microchip" style="color:#16A085"></i></center>
-                </div>
-                <div class="wrimagecard-topimage_title">
-                  <h4>PORCENTAJE CPU
-                  <div class="pull-right badge" ><h4 id = "cpu_used"></h4></div></h4>
-                </div>
-              </a>
-            </div>
-            </div>
           <div class="col-md-6 col-sm-4">
             <div class="wrimagecard wrimagecard-topimage">
-                <a href="#">
-                <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1)">
-                  <center><i class = "fa fa-clock-o" style="color:#16A085"></i></center>
+              <a href="#">
+                <div
+                  class="wrimagecard-topimage_header"
+                  style="background-color: rgba(22, 160, 133, 0.1);"
+                >
+                  <center>
+                    <i class="fa fa-microchip" style="color: #16a085;"></i>
+                  </center>
                 </div>
                 <div class="wrimagecard-topimage_title">
-                  <h4>Tiempo
-                  <div class="pull-right badge" id="WrControls">
-                    <h4 id = "segundos"></h4>
-                  </div></h4>
+                  <h4>
+                    PORCENTAJE CPU
+                    <div class="pull-right badge"><h4 id="cpu_used"></h4></div>
+                  </h4>
                 </div>
               </a>
             </div>
-      </div>
-      </div>
-        <div class="row">
-          <div class="col-md-12 col-sm-4">
-            <div class="wrimagecard wrimagecard-topimage" id="graph">
-              
+          </div>
+          <div class="col-md-6 col-sm-4">
+            <div class="wrimagecard wrimagecard-topimage">
+              <a href="#">
+                <div
+                  class="wrimagecard-topimage_header"
+                  style="background-color: rgba(22, 160, 133, 0.1);"
+                >
+                  <center>
+                    <i class="fa fa-clock-o" style="color: #16a085;"></i>
+                  </center>
+                </div>
+                <div class="wrimagecard-topimage_title">
+                  <h4>
+                    Tiempo
+                    <div class="pull-right badge" id="WrControls">
+                      <h4 id="segundos"></h4>
+                    </div>
+                  </h4>
+                </div>
+              </a>
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-4">
+            <div class="wrimagecard wrimagecard-topimage" id="graph"></div>
+          </div>
+        </div>
       </div>
-    </div>
     </main>
   </body>
   <!-- PLOTLY -->
