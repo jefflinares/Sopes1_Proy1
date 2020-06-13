@@ -40,7 +40,7 @@ socket.on("ram-total", (total) => {
 
 socket.on("ram-used", (ram) => {
   usedDiv.innerText = ram.used + " MB";
-  usedPercentDiv.innerText = ram.usedPercent + " %";
+  usedPercentDiv.innerText = am.usedPercent.toFixed(2) + " %";
 
   var time = new Date();
 
