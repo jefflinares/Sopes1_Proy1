@@ -15,45 +15,73 @@
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="css/css_cards.css" />
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </head>
   <body>
     <main class="container-fluid">
       <div class="row">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  
-          <div class="row" >
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs" id="navbar" role="tab">
+          <div class="row">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="navbar" role="tab">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="cuadruplos-tab"
+                  data-toggle="tab"
+                  href="index.html"
+                  role="tab"
+                  aria-controls="cuadruplos"
+                  aria-selected="false"
+                  >INICIO
+                  <i class="fa fa-home" style="color: #16a085;"></i>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a class="nav-link" id="cuadruplos-tab" data-toggle="tab" href="index.html" role="tab" aria-controls="cuadruplos" aria-selected="false">INICIO
-                    <i class="fa fa-home" style="color: #16a085;"></i>
-                  </a>
-                </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="reporteSimbolos-tab"
+                  data-toggle="tab"
+                  href="ram.html"
+                  role="tab"
+                  aria-controls="reporteSimbolos"
+                  aria-selected="true"
+                  >RAM
+                  <i class="fa fa-memory" style="color: #16a085;"></i>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a class="nav-link active" id="reporteSimbolos-tab" data-toggle="tab" href="ram.html" role="tab" aria-controls="reporteSimbolos" aria-selected="true">RAM
-                    <i class="fa fa-memory" style="color: #16a085;"></i>
-                  </a>
-                </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="compiEditor-tab"
+                  data-toggle="tab"
+                  href="cpu.html"
+                  role="tab"
+                  aria-controls="compiEditor"
+                  aria-selected="true"
+                  >CPU
+                  <i class="fa fa-microchip" style="color: #16a085;"></i>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a class="nav-link " id="compiEditor-tab" data-toggle="tab" href="cpu.html" role="tab" aria-controls="compiEditor" aria-selected="true">CPU
-                    <i class = "fa fa-microchip" style="color:#16A085"></i>
-                  </a>
-                </li>
-                
-               
-      
-                <li class="nav-item">
-                  <a class="nav-link" id="errores-tab" data-toggle="tab" href="procesos.html" role="tab" aria-controls="errores" aria-selected="true">PROCESOS
-                    <i class = "fa fa-cogs" style="color:#16A085"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </nav>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="errores-tab"
+                  data-toggle="tab"
+                  href="procesos.html"
+                  role="tab"
+                  aria-controls="errores"
+                  aria-selected="true"
+                  >PROCESOS
+                  <i class="fa fa-cogs" style="color: #16a085;"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Monitor de RAM</h1>

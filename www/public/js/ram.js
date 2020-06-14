@@ -26,10 +26,10 @@ Plotly.plot(
       showticklabels: true,
       tickangle: 45,
       tickfont: {
-        family: 'Old Standard TT, serif',
+        family: "Old Standard TT, serif",
         size: 14,
-        color: 'black'
-      }
+        color: "black",
+      },
     },
   }
 );
@@ -46,29 +46,27 @@ socket.on("ram-used", (ram) => {
 
   var update = {
     x: [[time]],
-    y: [[ram.used]]
-  }
+    y: [[ram.used]],
+  };
 
   var olderTime = time.setMinutes(time.getMinutes() - 1);
   var futureTime = time.setMinutes(time.getMinutes() + 1);
 
   var minuteView = {
     xaxis: {
-      type: 'date',
-      range: [olderTime, futureTime]
-    }
+      type: "date",
+      range: [olderTime, futureTime],
+    },
   };
 
   Plotly.relayout(graph, minuteView);
-  Plotly.extendTraces(graph, update, [0])
+  Plotly.extendTraces(graph, update, [0]);
 });
 
 setTimeout(() => {
   socket.emit("ram-total");
 }, 500);
 
-
 setInterval(() => {
   socket.emit("ram-used");
 }, 1000);
-

@@ -8,53 +8,51 @@ Github: https://github.com/nlinux1/
 Custom CSS file for JTable
 */
 
-#resultTitle{
-    font-size: 25px;
-    font-weight: bold;
-    text-decoration: underline;
-    padding-top: 25px;
-    padding-bottom: 15px;
+#resultTitle {
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: underline;
+  padding-top: 25px;
+  padding-bottom: 15px;
 }
 
-#output{
-    padding-bottom: 25px;
-    padding-top: 25px;
+#output {
+  padding-bottom: 25px;
+  padding-top: 25px;
 }
 
-#output > td{
-    padding: 3px 15px;
+#output > td {
+  padding: 3px 15px;
 }
 
-#rowCount{
-    font-size: 24px;
-    font-weight: bold;
+#rowCount {
+  font-size: 24px;
+  font-weight: bold;
 }
 
-#myTable{
-    margin-right: 15px;
+#myTable {
+  margin-right: 15px;
 }
 
-#btnExport{
-    display: none;
+#btnExport {
+  display: none;
 }
 
 tr.hide-table-padding td {
-    padding: 0;
-  }
-  
-  .expand-button {
-      position: relative;
-  }
-  
-  .accordion-toggle .expand-button:after
-  {
-    position: absolute;
-    left:.75rem;
-    top: 50%;
-    transform: translate(0, -50%);
-    content: '-';
-  }
-  .accordion-toggle.collapsed .expand-button:after
-  {
-    content: '+';
-  }
+  padding: 0;
+}
+
+.expand-button {
+  position: relative;
+}
+
+.accordion-toggle .expand-button:after {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translate(0, -50%);
+  content: "-";
+}
+.accordion-toggle.collapsed .expand-button:after {
+  content: "+";
+}
