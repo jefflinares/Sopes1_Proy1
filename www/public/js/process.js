@@ -182,7 +182,7 @@ socket.emit("proc");
 
 setInterval(() => {
   socket.emit("proc");
-}, 20000);
+}, 10000);
 
 
 
