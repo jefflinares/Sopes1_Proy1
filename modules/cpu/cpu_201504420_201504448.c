@@ -72,7 +72,7 @@ void read_process(struct seq_file *file, struct task_struct *task_parent, int ta
 
 /*
  * Metodo que imprime los procesos y busca el proceso padre
- * el cual es el que tiene como pid=1
+ * el cual la contiene la variable init_task
  */
 static int task_tree(struct seq_file *file, void *v) {
   seq_printf(file, "\t\t ___________________________________________ \n");
